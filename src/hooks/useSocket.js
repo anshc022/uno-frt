@@ -17,7 +17,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // Initialize socket connection
-    const newSocket = io('http://localhost:3001', {
+    const newSocket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:3001', {
       transports: ['websocket', 'polling']
     });
 

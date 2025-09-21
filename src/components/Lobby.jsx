@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSocket } from '../hooks/useSocket.jsx';
 import { useAuth } from '../contexts/AuthContext';
+import { apiFetch } from '../utils/api';
 
 const Lobby = () => {
   const [roomName, setRoomName] = useState('');
@@ -153,7 +154,7 @@ const Lobby = () => {
   const loadUserRooms = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/user-rooms', {
+      const response = await apiFetch('api/user-rooms', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -170,7 +171,7 @@ const Lobby = () => {
   const loadAvailableRooms = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/rooms', {
+      const response = await apiFetch('api/rooms', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

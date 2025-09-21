@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         setUser(parsedUser);
         
         // Verify token is still valid
-        fetch('/api/auth/verify', {
+        apiFetch('api/auth/verify', {
           headers: {
             'Authorization': `Bearer ${savedToken}`
           }
@@ -71,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       // Call logout endpoint to update server-side status
-      await fetch('/api/auth/logout', {
+      await apiFetch('api/auth/logout', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

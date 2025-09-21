@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { apiFetch } from '../utils/api';
 
 const Login = ({ onLogin, onSwitchToRegister }) => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const Login = ({ onLogin, onSwitchToRegister }) => {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await apiFetch('api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
